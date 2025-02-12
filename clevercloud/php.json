@@ -1,7 +1,13 @@
 {
     "deploy": {
       "composerrun": ["install --no-dev --prefer-dist"],
-      "postdeploy": ["php artisan migrate --force"]
+      "postdeploy": [
+        "php artisan migrate --force",
+        "php artisan config:clear",
+        "php artisan cache:clear",
+        "php artisan route:clear",
+        "php artisan view:clear"
+      ]
     }
   }
   
