@@ -1,13 +1,8 @@
 {
-    "deploy": {
-      "composerrun": ["install --no-dev --prefer-dist"],
-      "postdeploy": [
-        "php artisan migrate --force",
-        "php artisan config:clear",
-        "php artisan cache:clear",
-        "php artisan route:clear",
-        "php artisan view:clear"
-      ]
-    }
+  "deploy": {
+    "postdeploy": [
+      "chmod -R 755 storage bootstrap/cache",
+      "chown -R www-data:www-data storage bootstrap/cache"
+    ]
   }
-  
+}
