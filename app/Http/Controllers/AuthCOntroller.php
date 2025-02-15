@@ -9,28 +9,33 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 class AuthCOntroller extends Controller
 {
-    public function register(RegisterRequest $request){
-            $data = $request->validated();
+    public function register(RegisterRequest $request)
+    {
+        $data = $request->validated();
 
-            $user = User::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => bcrypt($data['password'])
-            ]);
-            
-            $token = $user->createToken('auth_token')->plainTextToken;
+        $user = User::create([
+            'Firstname' => $data['Name'],
+            'Lastname' => $data['Lastname'],
+            'Username' => $data['Username'],
+            'Email' => $data['Email'],
+            'Password' => bcrypt($data['Password']),
+            'ConfirmPassword' => bcrypt($data['ConfirmPassword'])
+        ]);
 
-            return response()->json([
-                'user' => $user, 
-                'token' => $token
-            ]);
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+            'user' => $user,
+            'token' => $token
+        ]);
 
     }
 
-    public function login(LoginRequest $request){
+    public function login(LoginRequest $request)
+    {
         $data = $request->validated();
 
-        if(!Auth::attempt($data)){
+        if (!Auth::attempt($data)) {
             return response([
                 'message' => 'Username or password is wrong'
             ]);
@@ -40,7 +45,7 @@ class AuthCOntroller extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
-            'user' => $user, 
+            'user' => $user,
             'token' => $token
         ]);
     }

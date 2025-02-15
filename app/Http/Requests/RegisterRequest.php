@@ -23,10 +23,13 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users|',
-            'password' => 'required|string',
-            Password::min(8)->letters()
+            'Firstname' => 'required|string|max:255',
+            'Lastname' => 'required|unique:users|',
+            'Username' => 'required|string|unique:users|',
+            'Email' => 'required|email|unique:users|',
+            'Password' => 'required|string',
+            Password::min(8)->letters(),
+
         ];
     }
 }
