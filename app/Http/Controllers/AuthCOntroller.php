@@ -1,25 +1,26 @@
 <?php
 
 namespace App\Http\Controllers;
+use Laravel\Sanctum\HasApiTokens;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-class AuthCOntroller extends Controller
+use App\Models\Friend;
+class AuthController extends Controller
 {
     public function register(RegisterRequest $request)
     {
         $data = $request->validated();
 
         $user = User::create([
-            'Firstname' => $data['Name'],
-            'Lastname' => $data['Lastname'],
-            'Username' => $data['Username'],
-            'Email' => $data['Email'],
-            'Password' => bcrypt($data['Password']),
-            'ConfirmPassword' => bcrypt($data['ConfirmPassword'])
+            'firstname' => $data['firstname'],
+            'lastname' => $data['lastname'],
+            'email' => $data['email'],
+            'password' => $data['password'],
+            'username' => $data['username']
         ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;
