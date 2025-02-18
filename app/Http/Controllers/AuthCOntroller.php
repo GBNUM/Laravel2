@@ -15,7 +15,7 @@ class AuthController extends Controller
     {
         $data = $request->validated();
 
-        $user = User::create([
+        $user = Friend::create([
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
             'email' => $data['email'],

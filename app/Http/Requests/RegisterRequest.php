@@ -29,7 +29,6 @@ class RegisterRequest extends FormRequest
             'email' => 'required|email|unique:users',
             'password' => 'required|string',
             Password::min(8)->letters()
-
         ];
     }
 }
